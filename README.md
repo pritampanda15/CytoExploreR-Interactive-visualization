@@ -106,18 +106,10 @@ library(CytoExploreRData)
 
    - Visualize compensation, gating trees, and gating schemes.
 
-## Contributing
-
-Contributions to improve the analysis or extend the functionality are welcome. Please feel free to fork the repository and submit pull requests.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 ## Acknowledgments
 
-- Thanks to the creators of the R packages used in this project.
-- German Cancer Research Center (DKFZ) for supporting this work.
+- Thanks to the creators of the R packages used in this project. https://github.com/DillonHammill/CytoExploreR/
 ```
 
 This README.md template provides a structured way to present your project on GitHub, including how to set up the environment, install dependencies, prepare data, and proceed through the analysis workflow. Adjust the paths and commands according to your specific project needs.
