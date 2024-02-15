@@ -1,23 +1,41 @@
 # CytoExploreR-Interactive-visualization
 CytoExploreR: A Comprehensive Open-Source R Package for Interactive Cytometry Data Analysis
 
-Sure! Below is the entire code placed into a GitHub Readme.md file format:
-
 ```markdown
 # Interactive Analysis of Cytometry Data in R
 
-## Overview
-This repository provides code for interactive analysis of cytometry data in R, authored by Pritam Kumar Panda from the German Cancer Research Center (DKFZ) in Germany.
+**Author:** Pritam Kumar Panda  
+**Institution:** German Cancer Research Center (DKFZ)  
+**Country:** Germany  
 
-## Setup
-Before running the code, ensure you have set your working directory to the appropriate location. You can do this with the following command:
-```R
+This project is dedicated to providing a comprehensive guide for the interactive analysis of cytometry data using R. It leverages a variety of R packages to preprocess, analyze, and visualize cytometry data effectively.
+
+## Prerequisites
+
+Before you can run the scripts, make sure you have R installed on your system. You will also need to install some dependencies.
+
+### Set Your Working Directory
+
+```r
 setwd("/Users/pritam/facs_data_analysis_R/FACS/CytoExploreR")
 ```
 
-## Packages Installation
-Install the required packages:
-```R
+### Initialize renv (Optional)
+
+```r
+# renv::init()
+```
+
+### Increase Memory and Use Cache for Larger Files
+
+```r
+knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, cache.lazy = FALSE)
+```
+
+### Install Required Libraries
+
+```r
+# Install these packages if not already installed
 install.packages("tidyverse")
 install.packages("knitr")
 install.packages("ggplot2")
@@ -25,22 +43,23 @@ install.packages("remotes")
 install.packages("BiocManager")
 install.packages("devtools")
 install.packages("kableExtra")
-install.packages("devtools")
 
 # Bioconductor packages
-BiocManager::install(c("flowCore", "flowWorkspace", "openCyto", "flowAI", "ggcyto", "CytoML"))
-```
+BiocManager::install("flowCore")
+BiocManager::install("flowWorkspace")
+BiocManager::install("openCyto")
+BiocManager::install("flowAI")
+BiocManager::install("ggcyto")
+BiocManager::install("CytoML")
 
-## CytoExploreR Installation
-Install CytoExploreR and CytoExploreRData from GitHub:
-```R
+# CytoExploreR
 devtools::install_github("DillonHammill/CytoExploreR")
 devtools::install_github("DillonHammill/CytoExploreRData")
 ```
 
-## Required Packages
-Load the necessary packages for analysis:
-```R
+### Load Required Packages
+
+```r
 library(flowCore)
 library(CytoML)
 library(flowAI)
@@ -55,31 +74,50 @@ library(CytoExploreR)
 library(CytoExploreRData)
 ```
 
-## Save FCS Files
-Ensure you have created a folder in your working directory and added your FCS files into it. Use the following commands to save the Compensation and Activation datasets to appropriately named folders:
-```R
-cyto_save(Compensation, save_as = "Compensation-Samples")
-cyto_save(Activation, save_as = "Activation-Samples")
+## Data Preparation
+
+### Save FCS Files
+
+- **Compensation FCS Files**
+
+  ```r
+  cyto_save(Compensation, save_as = "Compensation-Samples")
+  ```
+
+- **Activation FCS Files**
+
+  ```r
+  cyto_save(Activation, save_as = "Activation-Samples")
+  ```
+
+## Analysis Workflow
+
+1. **Compensation of Fluorescent Spillover**
+
+   - Prepare and compute the spillover matrix.
+   - Interactively edit spillover matrices.
+
+2. **Sample Analysis**
+
+   - Load, annotate, and compensate samples.
+   - Perform gating strategies for cell populations.
+
+3. **Visualizations**
+
+   - Visualize compensation, gating trees, and gating schemes.
+
+## Contributing
+
+Contributions to improve the analysis or extend the functionality are welcome. Please feel free to fork the repository and submit pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+## Acknowledgments
+
+- Thanks to the creators of the R packages used in this project.
+- German Cancer Research Center (DKFZ) for supporting this work.
 ```
 
-## Compensation of Fluorescent Spillover
-Prepare compensation controls and compute spillover matrix:
-```R
-gs <- cyto_setup("Compensation-Samples", gatingTemplate = "Compensation-gatingTemplate.csv")
-gs <- cyto_transform(gs, type = "logicle")
-cyto_gate_draw(gs, parent = "root", alias = "Cells", channels = c("FSC-A", "SSC-A"))
-# More commands...
-```
-
-## Analysis of Samples
-Analyze the samples (treated samples) by loading and annotating them:
-```R
-gs <- cyto_setup("Activation-Samples", gatingTemplate = "Activation-gatingTemplate.csv")
-# More commands...
-```
-
-## Note
-For detailed explanation and usage of each command, refer to the comments in the code.
-```
-
-This Markdown document provides a structured presentation of the code, including setup instructions, package installation, data processing steps, and analysis procedures.
+This README.md template provides a structured way to present your project on GitHub, including how to set up the environment, install dependencies, prepare data, and proceed through the analysis workflow. Adjust the paths and commands according to your specific project needs.
